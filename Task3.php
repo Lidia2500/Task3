@@ -5,10 +5,17 @@ if(empty($name)){
     $errors['name'] = "Field Required"; 
 }
 
-if(empty($email)){
-    $errors['email'] = "Field Required";
-}elseif(!filter_var($email,FILTER_VALIDATE_EMAIL)){
-   $errors['Email']   = "Invalid Email";
+function email_validation($str) {
+    return (!preg_match(
+"^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $str))
+        ? FALSE : TRUE;
+}
+  
+if(!email_validation("author@geeksforgeeks.com")) {
+    echo "Invalid email address.";
+}
+else {
+    echo "Valid email address.";
 }
 
    if(empty($password)){
